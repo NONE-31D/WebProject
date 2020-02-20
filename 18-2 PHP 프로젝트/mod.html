@@ -1,0 +1,60 @@
+<?php
+session_start();
+$db = new mysqli("localhost","test","1111","project");
+
+echo $_GET['id'];
+
+$id = $_GET['id'];
+$no = $_GET['no'];
+
+if($_SESSION['userid']!=$id){
+  echo "<script>confirm('Not Allowed');location.href='board1.php'</script>";
+}
+?>
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>업서 죽었어</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <link rel="stylesheet" type="text/css" href="board.css">
+</head>
+<body>
+	<div class="menubar">
+			<ul>
+					<li><a href="index.html">Home</a></li>
+					<li>
+							<a href="#" id="current">Board</a>
+							<ul>
+									<li><a href="Board1.php">Free Board</a></li>
+									<li><a href="#">Galleries</a></li>
+									<li><a href="#">Apps</a></li>
+									<li><a href="#">Extensions</a></li>
+							</ul>
+					</li>
+
+
+					<li_r><a href="logout.php">Logout</a></li_r>
+					<li_r><a href="join.html">Sign Up</a></li_r>
+					<li_r><a href="login.html">Login</a></li_r>
+			</ul>
+	</div>
+	<hr>
+    <div id="board_area">
+			<br><br><br>
+        <h1>Free Board</h1>
+        <br><br><br>
+
+        <h3>---Modify---</h3><br>
+
+<form action="mod.php?no=<?echo $no; ?>" method="post">
+  <?
+  echo "Writer| ";
+  echo $_SESSION['userid'];
+  ?>
+  <br>
+  TITLE : <input type="text" name="title" />
+   <br />CONTENTS : <br />
+   <textarea name="contents"></textarea>
+   <br />
+   <input type="submit" value="submit" />
+</form>
